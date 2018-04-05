@@ -1,10 +1,9 @@
 import $ from 'jquery';
 import Rx, { Observable } from 'rxjs/Rx';
-import { setupRxDevtools } from 'rx-devtools/rx-devtools';
-import 'rx-devtools/add/operator/debug';
+// import { setupRxDevtools } from 'rx-devtools/rx-devtools';
+// import 'rx-devtools/add/operator/debug';
 
-setupRxDevtools();
-
+// setupRxDevtools();
 
 const SEARCH_REPOS = 'https://api.github.com/search/repositories?sort=stars&order=desc&q=';
 
@@ -14,7 +13,7 @@ let input$ = Observable.fromEvent(input, 'input')
 
 let app$ = input$
     .debounceTime(200)
-    .debug('查询')
+    // .debug('查询')
     .map(e => e.target.value)
     .filter((text) => !!text)
     .switchMap(key => {
@@ -59,19 +58,8 @@ function toggleBgColor($dom) {
     })
 
     return mouseover$.merge(mouseout$, click$)
+        .map($dom => $dom.target.innerHTML)
 }
 
 app$.subscribe(console.log);
 
-
-
-
-// Observable.fromEvent($(document), 'click').subscribe(console.log)
-
-
-let source$ = Observable.from([1,2,3,4])
-.map(val => val + '~')
-.switchMap((val) => Observable.of(val))
-
-
-source$.subscribe(console.log)
