@@ -1,14 +1,14 @@
 Rxjs-demo
 ======================
 
-## content
+### content
 
 * Rxjs 
 * rx-devtools 
 * webpack 
 * es6 
 
-## 开始
+### start
 ```
     npm run start
 ```
