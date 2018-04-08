@@ -1,19 +1,19 @@
 import $ from 'jquery';
 import Rx, { Observable } from 'rxjs/Rx';
-// import { setupRxDevtools } from 'rx-devtools/rx-devtools';
-// import 'rx-devtools/add/operator/debug';
+import { setupRxDevtools } from 'rx-devtools/rx-devtools';
+import 'rx-devtools/add/operator/debug';
 
-// setupRxDevtools();
+setupRxDevtools();
 
 const SEARCH_REPOS = 'https://api.github.com/search/repositories?sort=stars&order=desc&q=';
 
 // 输入关键字进行异步查找并排序
-let input = document.getElementById('todo-val')
+let input = document.getElementById('input')
 let input$ = Observable.fromEvent(input, 'input')
 
 let app$ = input$
     .debounceTime(200)
-    // .debug('查询')
+    .debug('查询')
     .map(e => e.target.value)
     .filter((text) => !!text)
     .switchMap(key => {
